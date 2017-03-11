@@ -65,18 +65,6 @@
     return [ciphertext copy];
 }
 
-const char* merge(const char *s1,const char *s2)
-{
-    char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
-    //in real code you would check for errors in malloc here
-    if (result == NULL) exit (1);
-    
-    strcpy(result, s1);
-    strcat(result, s2);
-    
-    return result;
-}
-
 //解密
 + (NSString *)decryptUseDES:(NSString*)cipherText key:(NSString*)key
 {
@@ -121,32 +109,6 @@ const char* merge(const char *s1,const char *s2)
         plainText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }
     return plainText;
-}
-
-/**
- 二进制转十六进制
-
- @param data 二进制数据
- @return 十六进制字符串
- */
-+ (NSString *)hexStringFromData:(NSData *)data
-{
-    Byte *bytes = (Byte *)[data bytes];
-    //下面是Byte 转换为16进制。
-    NSString *hexStr=@"";
-    for(int i=0;i<[data length];i++)
-    {
-        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
-        
-        if([newHexStr length]==1)
-            
-            hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
-        
-        else
-            
-            hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr]; 
-    } 
-    return hexStr; 
 }
 
 //将NSString转换成十六进制的字符串则可使用如下方式:
